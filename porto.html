@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --accent-color: #4CAF50;
+            --secondary-bg: #2a2a2a;
+            --tertiary-bg: #333333;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-image: url('/placeholder.svg?height=300&width=1200');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            position: relative;
+        }
+        nav {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        .profile {
+            position: absolute;
+            bottom: -75px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--accent-color);
+            object-fit: cover;
+        }
+        h1, h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        section {
+            padding: 50px 0;
+        }
+        .about, .skills, .portfolio, .experience, .education, .references, .contact {
+            background-color: var(--secondary-bg);
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        .about {
+            margin-top: 100px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .about-text, .about-info {
+            width: 48%;
+        }
+        .skill-item {
+            margin-bottom: 20px;
+        }
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+        }
+        .skill-bar {
+            height: 10px;
+            background-color: var(--tertiary-bg);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .skill-level {
+            height: 100%;
+            background-color: var(--accent-color);
+        }
+        .portfolio-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .experience-item {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        .education-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+        }
+        .education-date {
+            padding: 10px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 10px; 
+            margin-top: 30px;
+            width: 100%; 
+        }
+        .education-content {
+            flex: 1;
+            padding: 10px; 
+            background-color: var(--tertiary-bg);
+            border-radius: 5px;
+            width: 100%; 
+        }
+        .experience-date {
+            width: 200px;
+            padding: 10px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            text-align: center;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+        .experience-content {
+            flex: 1;
+        }
+        .reference-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .reference-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .contact-form {
+            display: grid;
+            gap: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: var(--tertiary-bg);
+            color: var(--text-color);
+            border-radius: 5px;
+        }
+        button {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: var(--secondary-bg);
+        }
+
+        .nav-toggle {
+            display: none;
+        }
+        .nav-toggle-label {
+            display: none;
+            cursor: pointer;
+        }
+        .nav-toggle-label span,
+        .nav-toggle-label span::before,
+        .nav-toggle-label span::after {
+            display: block;
+            background: var(--text-color);
+            height: 2px;
+            width: 2em;
+            border-radius: 2px;
+            position: relative;
+        }
+        .nav-toggle-label span::before,
+        .nav-toggle-label span::after {
+            content: '';
+            position: absolute;
+        }
+        .nav-toggle-label span::before {
+            bottom: 7px;
+        }
+        .nav-toggle-label span::after {
+            top: 7px;
+        }
+        @media screen and (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background: rgba(0, 0, 0, 0.9);
+                clip-path: circle(0px at top right);
+                transition: clip-path 0.5s ease-in-out;
+                pointer-events: none;
+            }
+            nav ul li {
+                margin: 1rem 0;
+            }
+            .nav-toggle-label {
+                display: block;
+                position: fixed;
+                top: 1rem;
+                right: 1rem;
+                z-index: 1001;
+            }
+            .nav-toggle:checked ~ ul {
+                clip-path: circle(100% at center);
+                pointer-events: auto;
+            }
+        }
+        .skills ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .skills ul li {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-toggle-label">
+                <span></span>
+            </label>
+            <ul>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#skills">Keterampilan</a></li>
+                <li><a href="#education">Pendidikan</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
+        <div class="profile">
+            <img src="/foto-diri.jpg?height=150&width=150" alt="Your Name" class="profile-photo">
+            <h1>Rizki Arbiansyah</h1>
+            <p>Mahasiswa Gunadarma</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="about" class="about">
+            <div class="about-text">
+                <h2>Tentang Saya</h2>
+                <p>Halo! Perkenalkan nama saya Rizki Arbiansyah.</p>
+                <p>Saya lahir di Jakarta tepatnya di Jakarta Barat. Saya seorang alumni lulusan dari SMAN 24 Jakarta angkatan tahun 2022. Saat ini saya baru saja menjadi mahasiswa di Universitas Gunadarma Semester 5 dan mengambil jurusan Sistem Informasi.</p>
+            </div>
+            <div class="about-info">
+                <h2>Informasi Dasar</h2>
+                <p><strong>Umur :</strong> 30</p>
+                <p><strong>E-Mail :</strong> rizkiarbi65@gmail.com</p>
+                <p><strong>No. Telp :</strong> +62 821-1261-9691</p>
+                <p><strong>Alamat :</strong> DKI Jakarta, Indonesia</p>
+                <p><strong>Bahasa :</strong> Indonesia, Inggris</p>
+            </div>
+        </section>
+
+        <section id="skills" class="skills">
+            <h2>Keterampilan Skill</h2>
+            <ul>
+                <li>Microsoft Word</li>
+                <li>Microsoft PowerPoint</li>
+                <li>Canva</li>
+                <li>Photoshop</li>
+                <li>Figma</li>
+            </ul>
+        </section>
+
+
+        <section id="education" class="education">
+            <h2>Education</h2>
+            <div class="education-item">
+                <div class="education-date"><h3>2016 - 2019</h3></div>
+                <div class="education-content">
+                    <h3>SMPN 189 SSN JAKARTA</h3>
+                    <p>Di SMPN 189 SSN Jakarta, saya mengembangkan kemampuan akademis di tingkat menengah, menghadapi mata pelajaran yang lebih menantang, dan mulai membentuk minat pribadi di berbagai bidang. Pengalaman di sekolah ini sangat berperan dalam membangun pengetahuan yang lebih kompleks dan disiplin belajar.</p>
+                </div>
+                <div class="education-date"><h3>2019 - 2022</h3></div>
+                <div class="education-content">
+                    <h3>SMAN 24 JAKARTA</h3>
+                    <p>Pendidikan di SMAN 24 Jakarta memberikan saya kesempatan untuk mendalami berbagai mata pelajaran lebih lanjut. Saya juga mengikuti kegiatan ekstrakurikuler dan bersosialisasi dalam lingkup yang lebih luas, yang membantu membangun kemampuan berpikir kritis serta mempersiapkan diri menuju pendidikan tinggi.</p>
+                </div>
+                <div class="education-date"><h3>2022 - Sekarang</h3></div>
+                <div class="education-content">
+                    <h3>Universitas Gunadarma</h3>
+                    <p>Saat ini, saya berada di semester 5 di Universitas Gunadarma dengan jurusan Sistem Informasi. Di sini, saya mendalami bidang teknologi informasi dan manajemen data, serta memperoleh keterampilan praktis yang relevan dengan dunia profesional, yang kelak akan membantu saya dalam mengembangkan karier di industri teknologi.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>Kontak Saya</h2>
+            <form class="contact-form">
+                <input type="text" placeholder="Nama Anda" required>
+                <input type="email" placeholder="Email Anda" required>
+                <textarea placeholder="Pesan Anda" rows="5" required></textarea>
+                <button type="submit">Kirim Pesan</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Rizki Arbiansyah. All rights reserved.</p>
+    </footer>
+</body>
+</html>
